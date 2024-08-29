@@ -1,5 +1,5 @@
 import 'package:codestore/Animations/light_to_dark.dart';
-import 'package:codestore/HomeScreen/my_home_page.dart';
+import 'package:codestore/Screens/BootScreen/my_home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color primaryLight = Colors.teal;
-  static const Color secondaryLight = Colors.teal;
+  static const Color primaryLight = Colors.lightBlue;
+  static Color secondaryLight = Colors.grey[700]!;
   static const Color backgroundLight = Colors.white;
   static const Color surfaceLight = Colors.white;
   static const Color errorLight = Color(0xFFB00020);
@@ -12,8 +12,8 @@ class AppColors {
   static const Color onSurfaceLight = Colors.black;
   static const Color onErrorLight = Colors.white;
 
-  static const Color primaryDark = Colors.teal;
-  static const Color secondaryDark = Colors.teal;
+  static const Color primaryDark = Colors.lightBlue;
+  static Color secondaryDark = Colors.grey[800]!;
   static const Color backgroundDark = Color(0xFF121212);
   static const Color surfaceDark = Color(0xFF121212);
   static const Color errorDark = Color(0xFFCF6679);
@@ -22,10 +22,12 @@ class AppColors {
   static const Color onBackgroundDark = Colors.white;
   static const Color onSurfaceDark = Colors.white;
   static const Color onErrorDark = Colors.black;
+
+  get primary => null;
 }
 
 final lightTheme = ThemeData(
-  colorScheme: const ColorScheme(
+  colorScheme: ColorScheme(
     primary: AppColors.primaryLight,
     secondary: AppColors.secondaryLight,
     surface: AppColors.surfaceLight,
@@ -40,7 +42,7 @@ final lightTheme = ThemeData(
 );
 
 final darkTheme = ThemeData(
-  colorScheme: const ColorScheme(
+  colorScheme: ColorScheme(
     primary: AppColors.primaryDark,
     secondary: AppColors.secondaryDark,
     surface: AppColors.surfaceDark,
