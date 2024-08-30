@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 class ThemeToggleButton extends StatefulWidget {
   final ThemeProvider themeProvider;
 
-  const ThemeToggleButton({required this.themeProvider, Key? key})
-      : super(key: key);
+  const ThemeToggleButton({required this.themeProvider, super.key});
 
   @override
   _ThemeToggleButtonState createState() => _ThemeToggleButtonState();
@@ -69,7 +68,7 @@ class _ThemeToggleButtonState extends State<ThemeToggleButton>
                   BoxShadow(
                     color: Colors.black.withOpacity(0.8),
                     blurRadius: 8,
-                    offset: Offset(0, 4),
+                    offset: const Offset(0, 4),
                   ),
                 ],
               ),
@@ -91,9 +90,9 @@ class _ThemeToggleButtonState extends State<ThemeToggleButton>
                         child: AnimatedSwitcher(
                           duration: const Duration(milliseconds: 300),
                           child: _animation.value < 0.5
-                              ? Icon(Icons.light_mode,
+                              ? const Icon(Icons.light_mode,
                                   color: Colors.orange, key: ValueKey('light'))
-                              : Icon(Icons.dark_mode,
+                              : const Icon(Icons.dark_mode,
                                   color: Colors.blue, key: ValueKey('dark')),
                         ),
                       ),

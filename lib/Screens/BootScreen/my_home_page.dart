@@ -5,7 +5,6 @@ import 'package:codestore/Screens/HomeScreen/home_screen.dart';
 import 'package:codestore/Screens/ProfileScreen/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -22,7 +21,7 @@ class _MyHomePageState extends State<MyHomePage>
   late PageController _pageController;
 
   final List<Widget> _screens = [
-    const HomeScreen(),
+    HomeScreen(),
     const LikesScreen(),
     const SearchScreen(),
     ProfilePage(),
@@ -142,54 +141,10 @@ class _MyHomePageState extends State<MyHomePage>
         ),
       ),
       child: Scaffold(
-        body: CustomScrollView(
-          physics: const BouncingScrollPhysics(),
-          slivers: [
-            _selectedIndex != 3
-                ? SliverAppBar(
-                    surfaceTintColor: colorScheme.onPrimary,
-                    pinned: true,
-                    toolbarHeight: 80,
-                    floating: false,
-                    stretch: true,
-                    flexibleSpace: FlexibleSpaceBar(
-                      titlePadding: const EdgeInsets.only(left: 15),
-                      title: Row(
-                        children: [
-                          _selectedIndex == 0
-                              ? Text(
-                                  "Hello Abhishek!",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 35,
-                                    color:
-                                        Theme.of(context).colorScheme.onSurface,
-                                  ),
-                                )
-                              : IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(Icons.arrow_drop_down)),
-                          const Expanded(child: SizedBox()),
-                          const Padding(
-                            padding: EdgeInsets.only(right: 15.0),
-                            child: CircleAvatar(
-                              radius: 25,
-                              child: Icon(FontAwesomeIcons.user),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  )
-                : SliverToBoxAdapter(),
-            SliverFillRemaining(
-              child: PageView(
-                controller: _pageController,
-                onPageChanged: _onPageChanged,
-                children: _screens,
-              ),
-            ),
-          ],
+        body: PageView(
+          controller: _pageController,
+          onPageChanged: _onPageChanged,
+          children: _screens,
         ),
         floatingActionButton: CustomGNav(
           selectedIndex: _selectedIndex,
