@@ -1,3 +1,4 @@
+import 'package:codestore/Screens/login_screen/login_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -17,7 +18,6 @@ class _LoginSignupScreenState extends State<LoginSignupScreen>
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
-
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
@@ -114,10 +114,17 @@ class _LoginSignupScreenState extends State<LoginSignupScreen>
                             _buildActionButton(colors),
                             if (isLogin) _buildForgotPassword(colors),
                             const SizedBox(height: 24),
-                            if (isLogin) _buildGoogleLogin(colors),
-                            const SizedBox(height: 24),
-                            if (isLogin) _buildGitHubLogin(colors),
-                            const SizedBox(height: 24),
+                            if (isLogin)
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  _buildGoogleLogin(colors),
+                                  const SizedBox(
+                                      width:
+                                          20), // Add some space between the buttons
+                                  _buildGitHubLogin(colors),
+                                ],
+                              ),
                             _buildToggleButton(colors),
                           ],
                         ),
@@ -308,9 +315,20 @@ class _LoginSignupScreenState extends State<LoginSignupScreen>
 
   Widget _buildActionButton(ColorScheme colors) {
     return ElevatedButton(
-      onPressed: () {
-        // Implement login/signup logic
-        print('User Type: $_selectedUserType');
+      onPressed: () async {
+        if (isLogin &&
+            _emailController.text.isNotEmpty &&
+            _passwordController.text.isNotEmpty) {
+          emailpassLogin(_emailController.text, _passwordController.text,
+              context, _selectedUserType);
+        }
+        if (_emailController.text.isNotEmpty &&
+            _passwordController.text.isNotEmpty &&
+            _phoneController.text.isNotEmpty &&
+            _nameController.text.isNotEmpty) {
+          emailpassSignup(_emailController.text, _passwordController.text,
+              _phoneController.text, context, _selectedUserType);
+        }
       },
       style: ElevatedButton.styleFrom(
         foregroundColor: colors.onPrimary,
@@ -334,56 +352,44 @@ class _LoginSignupScreenState extends State<LoginSignupScreen>
     );
   }
 
-  Widget _buildGitHubLogin(ColorScheme colors) {
-    return ElevatedButton(
-      onPressed: () {
-        // Implement GitHub login logic
-      },
-      style: ElevatedButton.styleFrom(
-        foregroundColor: Colors.white,
-        backgroundColor: Colors.grey.shade900,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        padding: const EdgeInsets.symmetric(vertical: 14),
+  Widget _buildGoogleLogin(ColorScheme colors) {
+    return Container(
+      width: 60,
+      height: 60,
+      decoration: BoxDecoration(
+        color: Colors.blue,
+        borderRadius: BorderRadius.circular(12),
       ),
-      child: const Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(FontAwesomeIcons.github, size: 24),
-          SizedBox(width: 8),
-          Text(
-            'Login with GitHub',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-        ],
+      child: const Center(
+        child: SizedBox(
+            width: 30,
+            height: 30,
+            child: Icon(
+              FontAwesomeIcons.google,
+              color: Colors.white,
+              size: 24,
+            )),
       ),
     );
   }
 
-  Widget _buildGoogleLogin(ColorScheme colors) {
-    return ElevatedButton(
-      onPressed: () {
-        // Implement Google login logic
-      },
-      style: ElevatedButton.styleFrom(
-        foregroundColor: Colors.white,
-        backgroundColor: Colors.blue,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        padding: const EdgeInsets.symmetric(vertical: 14),
+  Widget _buildGitHubLogin(ColorScheme colors) {
+    return Container(
+      width: 60,
+      height: 60,
+      decoration: BoxDecoration(
+        color: Colors.grey[900],
+        borderRadius: BorderRadius.circular(12),
       ),
-      child: const Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(FontAwesomeIcons.google, size: 24),
-          SizedBox(width: 8),
-          Text(
-            'Login with Google',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-        ],
+      child: const Center(
+        child: SizedBox(
+            width: 30,
+            height: 30,
+            child: Icon(
+              FontAwesomeIcons.github,
+              color: Colors.white,
+              size: 24,
+            )),
       ),
     );
   }
