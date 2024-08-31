@@ -1,9 +1,15 @@
 import 'package:codestore/Animations/light_to_dark.dart';
-import 'package:codestore/Screens/BootScreen/my_home_page.dart';
+import 'package:codestore/Screens/login_screen/login_screen.dart';
+import 'package:codestore/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.android,
+  );
   runApp(
     ChangeNotifierProvider(
       create: (context) => ThemeProvider(),
@@ -14,7 +20,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(
@@ -25,7 +30,7 @@ class MyApp extends StatelessWidget {
           child: MaterialApp(
             title: 'App Demo',
             theme: themeProvider.currentTheme,
-            home: const MyHomePage(),
+            home: const LoginSignupScreen(),
             debugShowCheckedModeBanner: false,
           ),
         );

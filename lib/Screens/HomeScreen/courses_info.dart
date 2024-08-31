@@ -19,30 +19,6 @@ List<Map<String, Object>> filterCourses(String selectedCategory) {
       'imageurl':
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-Ji69HYeNqt2YPsYqeR_61Vzx3YcQpVT8cg&s"
     },
-    {
-      'title': 'Data Structures in Python',
-      'category': 'Data Structures',
-      'description': '8 weeks, Intermediate',
-      'price': 54.99,
-      'imageurl':
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-Ji69HYeNqt2YPsYqeR_61Vzx3YcQpVT8cg&s"
-    },
-    {
-      'title': 'Practical Data Structures in C++',
-      'category': 'Data Structures',
-      'description': '10 weeks, Intermediate',
-      'price': 59.99,
-      'imageurl':
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-Ji69HYeNqt2YPsYqeR_61Vzx3YcQpVT8cg&s"
-    },
-    {
-      'title': 'Data Structures in Java',
-      'category': 'Data Structures',
-      'description': '9 weeks, Beginner',
-      'price': 49.99,
-      'imageurl':
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-Ji69HYeNqt2YPsYqeR_61Vzx3YcQpVT8cg&s"
-    },
 
     // Algorithms
     {
@@ -53,22 +29,7 @@ List<Map<String, Object>> filterCourses(String selectedCategory) {
       'imageurl':
           "https://media.geeksforgeeks.org/wp-content/uploads/20230316121305/Complexity-Analysis-A-complete-reference-(1).png"
     },
-    {
-      'title': 'Algorithm Design and Analysis',
-      'category': 'Algorithms',
-      'description': '10 weeks, Intermediate',
-      'price': 64.99,
-      'imageurl':
-          "https://media.geeksforgeeks.org/wp-content/uploads/20230316121305/Complexity-Analysis-A-complete-reference-(1).png"
-    },
-    {
-      'title': 'Introduction to Algorithms',
-      'category': 'Algorithms',
-      'description': '12 weeks, Beginner',
-      'price': 54.99,
-      'imageurl':
-          "https://media.geeksforgeeks.org/wp-content/uploads/20230316121305/Complexity-Analysis-A-complete-reference-(1).png"
-    },
+
     {
       'title': 'Graph Algorithms',
       'category': 'Algorithms',
@@ -87,22 +48,7 @@ List<Map<String, Object>> filterCourses(String selectedCategory) {
     },
 
     // Operating Systems
-    {
-      'title': 'Operating Systems Fundamentals',
-      'category': 'Operating Systems',
-      'description': '12 weeks, Intermediate',
-      'price': 69.99,
-      "imageurl":
-          "https://i.pcmag.com/imagery/roundups/03HzxsBLnETBkBt5BrRsFIY-1.fit_lim.size_850x490.v1643742425.jpg"
-    },
-    {
-      'title': 'Advanced Operating Systems',
-      'category': 'Operating Systems',
-      'description': '14 weeks, Advanced',
-      'price': 79.99,
-      "imageurl":
-          "https://i.pcmag.com/imagery/roundups/03HzxsBLnETBkBt5BrRsFIY-1.fit_lim.size_850x490.v1643742425.jpg"
-    },
+
     {
       'title': 'Introduction to Linux Systems',
       'category': 'Operating Systems',
@@ -146,22 +92,6 @@ List<Map<String, Object>> filterCourses(String selectedCategory) {
           "https://media.geeksforgeeks.org/wp-content/uploads/20230406152358/CN-(1).jpg"
     },
     {
-      'title': 'Network Security Fundamentals',
-      'category': 'Computer Networks',
-      'description': '10 weeks, Advanced',
-      'price': 69.99,
-      'imageurl':
-          "https://media.geeksforgeeks.org/wp-content/uploads/20230406152358/CN-(1).jpg"
-    },
-    {
-      'title': 'Wireless Networks',
-      'category': 'Computer Networks',
-      'description': '11 weeks, Intermediate',
-      'price': 64.99,
-      'imageurl':
-          "https://media.geeksforgeeks.org/wp-content/uploads/20230406152358/CN-(1).jpg"
-    },
-    {
       'title': 'TCP/IP Protocol Suite',
       'category': 'Computer Networks',
       'description': '12 weeks, Advanced',
@@ -176,22 +106,6 @@ List<Map<String, Object>> filterCourses(String selectedCategory) {
       'category': 'DBMS',
       'description': '11 weeks, Beginner',
       'price': 64.99,
-      'imageurl':
-          "https://smsvaranasi.com/uploads/news/79/The-Considerations-And-Perks-Of-Choosing-A-DBMS-ITs-Guru.png"
-    },
-    {
-      'title': 'Advanced SQL Queries',
-      'category': 'DBMS',
-      'description': '8 weeks, Intermediate',
-      'price': 59.99,
-      'imageurl':
-          "https://smsvaranasi.com/uploads/news/79/The-Considerations-And-Perks-Of-Choosing-A-DBMS-ITs-Guru.png"
-    },
-    {
-      'title': 'NoSQL Databases',
-      'category': 'DBMS',
-      'description': '10 weeks, Advanced',
-      'price': 69.99,
       'imageurl':
           "https://smsvaranasi.com/uploads/news/79/The-Considerations-And-Perks-Of-Choosing-A-DBMS-ITs-Guru.png"
     },
@@ -229,30 +143,6 @@ List<Map<String, Object>> filterCourses(String selectedCategory) {
       'imageurl':
           "https://theforage.wpengine.com/wp-content/uploads/2022/12/what-is-cybersecurity-1536x947.jpg"
     },
-    {
-      'title': 'Introduction to Network Security',
-      'category': 'Cyber Security',
-      'description': '8 weeks, Beginner',
-      'price': 54.99,
-      'imageurl':
-          "https://theforage.wpengine.com/wp-content/uploads/2022/12/what-is-cybersecurity-1536x947.jpg"
-    },
-    {
-      'title': 'Cryptography and Network Security',
-      'category': 'Cyber Security',
-      'description': '11 weeks, Intermediate',
-      'price': 64.99,
-      'imageurl':
-          "https://theforage.wpengine.com/wp-content/uploads/2022/12/what-is-cybersecurity-1536x947.jpg"
-    },
-    {
-      'title': 'Advanced Cyber Security Techniques',
-      'category': 'Cyber Security',
-      'description': '14 weeks, Advanced',
-      'price': 79.99,
-      'imageurl':
-          "https://theforage.wpengine.com/wp-content/uploads/2022/12/what-is-cybersecurity-1536x947.jpg"
-    },
 
     // Artificial Intelligence
     {
@@ -263,30 +153,7 @@ List<Map<String, Object>> filterCourses(String selectedCategory) {
       'imageurl':
           'https://media.licdn.com/dms/image/v2/D5612AQHjDGhc8cNfJA/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1704439037481?e=1730332800&v=beta&t=h_Sq1eGjIiKQF97jfdDvevDKH2mxVhvJ2jt2Lr_Vn1o'
     },
-    {
-      'title': 'Introduction to Artificial Intelligence',
-      'category': 'Artificial Intelligence',
-      'description': '10 weeks, Beginner',
-      'price': 59.99,
-      'imageurl':
-          'https://media.licdn.com/dms/image/v2/D5612AQHjDGhc8cNfJA/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1704439037481?e=1730332800&v=beta&t=h_Sq1eGjIiKQF97jfdDvevDKH2mxVhvJ2jt2Lr_Vn1o'
-    },
-    {
-      'title': 'Deep Learning with TensorFlow',
-      'category': 'Artificial Intelligence',
-      'description': '12 weeks, Intermediate',
-      'price': 69.99,
-      'imageurl':
-          'https://media.licdn.com/dms/image/v2/D5612AQHjDGhc8cNfJA/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1704439037481?e=1730332800&v=beta&t=h_Sq1eGjIiKQF97jfdDvevDKH2mxVhvJ2jt2Lr_Vn1o'
-    },
-    {
-      'title': 'Natural Language Processing',
-      'category': 'Artificial Intelligence',
-      'description': '14 weeks, Advanced',
-      'price': 79.99,
-      'imageurl':
-          'https://media.licdn.com/dms/image/v2/D5612AQHjDGhc8cNfJA/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1704439037481?e=1730332800&v=beta&t=h_Sq1eGjIiKQF97jfdDvevDKH2mxVhvJ2jt2Lr_Vn1o'
-    },
+
     {
       'title': 'Reinforcement Learning',
       'category': 'Artificial Intelligence',
@@ -353,14 +220,7 @@ List<Map<String, Object>> filterCourses(String selectedCategory) {
       "imageurl":
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWwpZjviaGLAT52je89zklZqJzcX0-IBhJQA&s"
     },
-    {
-      'title': 'React Native for Mobile Apps',
-      'category': 'Mobile Development',
-      'description': '8 weeks, Beginner',
-      'price': 54.99,
-      "imageurl":
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWwpZjviaGLAT52je89zklZqJzcX0-IBhJQA&s"
-    },
+
     {
       'title': 'Flutter Development for Beginners',
       'category': 'Mobile Development',
@@ -369,14 +229,7 @@ List<Map<String, Object>> filterCourses(String selectedCategory) {
       "imageurl":
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWwpZjviaGLAT52je89zklZqJzcX0-IBhJQA&s"
     },
-    {
-      'title': 'Advanced Android Development',
-      'category': 'Mobile Development',
-      'description': '12 weeks, Advanced',
-      'price': 74.99,
-      "imageurl":
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWwpZjviaGLAT52je89zklZqJzcX0-IBhJQA&s"
-    },
+
     {
       'title': 'Introduction to Cloud Computing',
       'category': 'Cloud Computing',

@@ -1,6 +1,5 @@
-import 'dart:ui';
-
-import 'package:codestore/Screens/HomeScreen/coursesinfo.dart';
+import 'package:codestore/Screens/HomeScreen/course_search.dart';
+import 'package:codestore/Screens/HomeScreen/courses_info.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -11,8 +10,36 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   String _selectedCategory = '';
+  late AnimationController _animationController;
+  late Animation<double> _fadeAnimation;
+  late Animation<Offset> _slideAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1000),
+    );
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeIn),
+    );
+    _slideAnimation =
+        Tween<Offset>(begin: const Offset(0, 0.5), end: Offset.zero).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeOutQuad),
+    );
+    _animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -48,9 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 const Spacer(),
                 Icon(Icons.notifications_outlined,
                     color: Theme.of(context).colorScheme.onSurface),
-                const SizedBox(
-                  width: 15,
-                )
+                const SizedBox(width: 15)
               ],
             ),
           ),
@@ -61,13 +86,37 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildSearchBar(context),
+                FadeTransition(
+                  opacity: _fadeAnimation,
+                  child: SlideTransition(
+                    position: _slideAnimation,
+                    child: _buildSearchBar(context),
+                  ),
+                ),
                 const SizedBox(height: 16),
-                _buildPromotionBanner(context),
+                FadeTransition(
+                  opacity: _fadeAnimation,
+                  child: SlideTransition(
+                    position: _slideAnimation,
+                    child: _buildPromotionBanner(context),
+                  ),
+                ),
                 const SizedBox(height: 24),
-                _buildCategories(context),
+                FadeTransition(
+                  opacity: _fadeAnimation,
+                  child: SlideTransition(
+                    position: _slideAnimation,
+                    child: _buildCategories(context),
+                  ),
+                ),
                 const SizedBox(height: 24),
-                _buildPopularSection(context),
+                FadeTransition(
+                  opacity: _fadeAnimation,
+                  child: SlideTransition(
+                    position: _slideAnimation,
+                    child: _buildPopularSection(context),
+                  ),
+                ),
               ],
             ),
           ),
@@ -77,20 +126,34 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildSearchBar(BuildContext context) {
-    return TextField(
-      decoration: InputDecoration(
-        hintText: 'Search courses, topics, tutors...',
-        hintStyle: TextStyle(
-            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6)),
-        prefixIcon:
-            Icon(Icons.search, color: Theme.of(context).colorScheme.primary),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide(color: Theme.of(context).colorScheme.primary),
+    return GestureDetector(
+      onTap: () {
+        _showSearchPage(context);
+      },
+      child: TextField(
+        enabled: false,
+        decoration: InputDecoration(
+          hintText: 'Search courses, topics, tutors...',
+          hintStyle: TextStyle(
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6)),
+          prefixIcon:
+              Icon(Icons.search, color: Theme.of(context).colorScheme.primary),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30),
+            borderSide:
+                BorderSide(color: Theme.of(context).colorScheme.primary),
+          ),
+          filled: true,
+          fillColor: Theme.of(context).colorScheme.surface,
         ),
-        filled: true,
-        fillColor: Theme.of(context).colorScheme.surface,
       ),
+    );
+  }
+
+  void _showSearchPage(BuildContext context) {
+    showSearch(
+      context: context,
+      delegate: CourseSearchDelegate(courses: filterCourses('')),
     );
   }
 
@@ -140,77 +203,71 @@ class _HomeScreenState extends State<HomeScreen> {
       {
         'icon': FontAwesomeIcons.diagramProject,
         'label': '    Data\nStructures'
-      }, // Data Structures (Tree/Graph)
-      {'icon': Icons.memory, 'label': 'Algorithms\n'}, // Algorithms
-      {
-        'icon': Icons.desktop_windows,
-        'label': 'Operating\nSystems'
-      }, // Operating Systems
-      {
-        'icon': Icons.router,
-        'label': 'Computer\nNetworks'
-      }, // Computer Networks
-      {'icon': Icons.storage, 'label': 'DBMS'}, // DBMS
-      {'icon': Icons.security, 'label': 'Cyber\nSecurity'}, // Cyber Security
-      {
-        'icon': Icons.android,
-        'label': 'Artificial\nIntelligence'
-      }, // Artificial Intelligence
-      {
-        'icon': Icons.code,
-        'label': 'Programming\nLanguages'
-      }, // Programming Languages
-      {
-        'icon': Icons.phone_android,
-        'label': 'Mobile\nDevelopment'
-      }, // Mobile Development
-      {'icon': Icons.cloud, 'label': 'Cloud\nComputing'}, // Cloud Computing
-      {'icon': Icons.web, 'label': 'Web\nDevelopment'}, // Web Development
-      {
-        'icon': Icons.developer_board,
-        'label': 'Embedded\nSystems'
-      }, // Embedded Systems
-      {'icon': Icons.data_usage, 'label': 'Big\nData'}, // Big Data
+      },
+      {'icon': Icons.memory, 'label': 'Algorithms\n'},
+      {'icon': Icons.desktop_windows, 'label': 'Operating\nSystems'},
+      {'icon': Icons.router, 'label': 'Computer\nNetworks'},
+      {'icon': Icons.storage, 'label': 'DBMS'},
+      {'icon': Icons.security, 'label': 'Cyber\nSecurity'},
+      {'icon': Icons.android, 'label': 'Artificial\nIntelligence'},
+      {'icon': Icons.code, 'label': 'Programming\nLanguages'},
+      {'icon': Icons.phone_android, 'label': 'Mobile\nDevelopment'},
+      {'icon': Icons.cloud, 'label': 'Cloud\nComputing'},
+      {'icon': Icons.web, 'label': 'Web\nDevelopment'},
+      {'icon': Icons.developer_board, 'label': 'Embedded\nSystems'},
+      {'icon': Icons.data_usage, 'label': 'Big\nData'},
     ];
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('Engineering Fields',
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.onSurface)),
-            TextButton(
-              onPressed: () {
-                setState(() {
-                  _selectedCategory = '';
-                });
-              },
-              child: Text('CLEAR FILTER',
-                  style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
-                      fontWeight: FontWeight.bold)),
-            ),
-          ],
-        ),
-        const SizedBox(height: 16),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: categories
-                .map((category) => _buildCategoryItem(
-                      context: context,
-                      icon: category['icon'] as IconData,
-                      label: category['label'] as String,
-                    ))
-                .toList(),
+    return AnimatedBuilder(
+      animation: _animationController,
+      builder: (context, child) {
+        return Transform.translate(
+          offset: Offset(0, 50 * (1 - _animationController.value)),
+          child: Opacity(
+            opacity: _animationController.value,
+            child: child,
           ),
-        ),
-      ],
+        );
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Engineering Fields',
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.onSurface)),
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    _selectedCategory = '';
+                  });
+                },
+                child: Text('CLEAR FILTER',
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.bold)),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: categories
+                  .map((category) => _buildCategoryItem(
+                        context: context,
+                        icon: category['icon'] as IconData,
+                        label: category['label'] as String,
+                      ))
+                  .toList(),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -260,45 +317,57 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildPopularSection(BuildContext context) {
     final filteredCourses = filterCourses(_selectedCategory);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('Popular Courses',
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.onSurface)),
-            Text('SHOW ALL',
-                style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
-                    fontWeight: FontWeight.bold)),
-          ],
-        ),
-        const SizedBox(height: 16),
-        if (filteredCourses.isEmpty)
-          Center(
-            child: Text('No courses found for the selected category.',
-                style:
-                    TextStyle(color: Theme.of(context).colorScheme.onSurface)),
-          )
-        else
-          ...filteredCourses.map(
-            (course) => Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: _buildCourseCard(
-                context,
-                course['title'] as String,
-                course['category'] as String,
-                course['description'] as String,
-                course['price'] as double,
-                course['imageurl'] as String,
+    return AnimatedBuilder(
+      animation: _animationController,
+      builder: (context, child) {
+        return Transform.translate(
+          offset: Offset(0, 100 * (1 - _animationController.value)),
+          child: Opacity(
+            opacity: _animationController.value,
+            child: child,
+          ),
+        );
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Popular Courses',
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.onSurface)),
+              Text('SHOW ALL',
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.bold)),
+            ],
+          ),
+          const SizedBox(height: 16),
+          if (filteredCourses.isEmpty)
+            Center(
+              child: Text('No courses found for the selected category.',
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurface)),
+            )
+          else
+            ...filteredCourses.map(
+              (course) => Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: _buildCourseCard(
+                  context,
+                  course['title'] as String,
+                  course['category'] as String,
+                  course['description'] as String,
+                  course['price'] as double,
+                  course['imageurl'] as String,
+                ),
               ),
             ),
-          ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -359,7 +428,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
-          // Bottom section with course info
           Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -375,7 +443,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 24,

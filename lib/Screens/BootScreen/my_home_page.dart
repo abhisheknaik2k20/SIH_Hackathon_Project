@@ -21,7 +21,7 @@ class _MyHomePageState extends State<MyHomePage>
   late PageController _pageController;
 
   final List<Widget> _screens = [
-    HomeScreen(),
+    const HomeScreen(),
     const LikesScreen(),
     const SearchScreen(),
     ProfilePage(),
