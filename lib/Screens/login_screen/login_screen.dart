@@ -42,7 +42,13 @@ class _LoginSignupScreenState extends State<LoginSignupScreen>
     ));
     _scaleAnimation = Tween<double>(begin: 0.8, end: 1.0).animate(
         CurvedAnimation(parent: _animationController, curve: Curves.easeInOut));
-    _animationController.forward();
+
+    // Delay the start of the animation
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(const Duration(milliseconds: 100), () {
+        _animationController.forward();
+      });
+    });
   }
 
   @override
@@ -113,6 +119,12 @@ class _LoginSignupScreenState extends State<LoginSignupScreen>
                             const SizedBox(height: 24),
                             _buildActionButton(colors),
                             if (isLogin) _buildForgotPassword(colors),
+                            const SizedBox(height: 24),
+                            if (isLogin)
+                              const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [Text("Or Login with")],
+                              ),
                             const SizedBox(height: 24),
                             if (isLogin)
                               Row(
@@ -353,43 +365,53 @@ class _LoginSignupScreenState extends State<LoginSignupScreen>
   }
 
   Widget _buildGoogleLogin(ColorScheme colors) {
-    return Container(
-      width: 60,
-      height: 60,
-      decoration: BoxDecoration(
-        color: Colors.blue,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: const Center(
-        child: SizedBox(
-            width: 30,
-            height: 30,
-            child: Icon(
-              FontAwesomeIcons.google,
-              color: Colors.white,
-              size: 24,
-            )),
+    return GestureDetector(
+      onTap: () {
+        implementGoogleSignIn(context, _selectedUserType);
+      },
+      child: Container(
+        width: 60,
+        height: 60,
+        decoration: BoxDecoration(
+          color: Colors.grey.shade900,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: const Center(
+          child: SizedBox(
+              width: 30,
+              height: 30,
+              child: Icon(
+                FontAwesomeIcons.google,
+                color: Colors.white,
+                size: 30,
+              )),
+        ),
       ),
     );
   }
 
   Widget _buildGitHubLogin(ColorScheme colors) {
-    return Container(
-      width: 60,
-      height: 60,
-      decoration: BoxDecoration(
-        color: Colors.grey[900],
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: const Center(
-        child: SizedBox(
-            width: 30,
-            height: 30,
-            child: Icon(
-              FontAwesomeIcons.github,
-              color: Colors.white,
-              size: 24,
-            )),
+    return GestureDetector(
+      onTap: () async {
+        gitHubSignIn(context, _selectedUserType);
+      },
+      child: Container(
+        width: 60,
+        height: 60,
+        decoration: BoxDecoration(
+          color: Colors.grey[900],
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: const Center(
+          child: SizedBox(
+              width: 30,
+              height: 30,
+              child: Icon(
+                FontAwesomeIcons.github,
+                color: Colors.white,
+                size: 30,
+              )),
+        ),
       ),
     );
   }

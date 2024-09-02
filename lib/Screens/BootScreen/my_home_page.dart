@@ -1,8 +1,12 @@
 import 'package:codestore/Animations/light_to_dark.dart';
+import 'package:codestore/Screens/Community/community.dart';
 import 'package:codestore/CustomWidgets/togglebutton.dart';
 import 'package:codestore/Screens/BootScreen/bottom_nav_bar.dart';
+import 'package:codestore/Screens/DashBoard/dash_board.dart';
 import 'package:codestore/Screens/HomeScreen/home_screen.dart';
 import 'package:codestore/Screens/ProfileScreen/profile.dart';
+import 'package:codestore/Screens/login_screen/login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:provider/provider.dart';
@@ -23,8 +27,8 @@ class _MyHomePageState extends State<MyHomePage>
   final List<Widget> _screens = [
     const HomeScreen(),
     const LikesScreen(),
-    const SearchScreen(),
-    ProfilePage(),
+    EngineeringDashboardScreen(),
+    const ClassroomScreen(),
   ];
 
   @override
@@ -119,6 +123,17 @@ class _MyHomePageState extends State<MyHomePage>
                 onTap: () {},
                 leading: const Icon(Icons.settings),
                 title: const Text('Settings'),
+              ),
+              ListTile(
+                onTap: () {
+                  FirebaseAuth.instance.signOut();
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (context) => LoginSignupScreen()),
+                      (Route route) => false);
+                },
+                leading: const Icon(Icons.logout),
+                title: const Text('Log-Out'),
               ),
               const Spacer(),
               ThemeToggleButton(

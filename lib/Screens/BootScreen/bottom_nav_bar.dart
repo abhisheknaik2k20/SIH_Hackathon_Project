@@ -44,8 +44,8 @@ class CustomGNav extends StatelessWidget {
             text: 'Likes',
           ),
           GButton(
-            icon: LineIcons.search,
-            text: 'Search',
+            icon: LineIcons.wiredNetwork,
+            text: 'Forum',
           ),
           GButton(
             icon: LineIcons.user,

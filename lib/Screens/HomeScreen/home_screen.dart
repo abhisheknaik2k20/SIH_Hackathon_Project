@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:codestore/Screens/HomeScreen/course_search.dart';
 import 'package:codestore/Screens/HomeScreen/courses_info.dart';
 import 'package:flutter/material.dart';
@@ -377,19 +378,8 @@ class _HomeScreenState extends State<HomeScreen>
       width: double.infinity,
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Colors.purple, Colors.blue],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
+        color: Theme.of(context).colorScheme.primary,
         borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
-          ),
-        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -443,7 +433,7 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
                 Text(
                   title,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
