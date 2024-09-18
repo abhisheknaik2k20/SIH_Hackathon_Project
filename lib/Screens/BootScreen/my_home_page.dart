@@ -5,6 +5,7 @@ import 'package:codestore/Screens/BootScreen/bottom_nav_bar.dart';
 import 'package:codestore/Screens/DashBoard/dash_board.dart';
 import 'package:codestore/Screens/HomeScreen/home_screen.dart';
 import 'package:codestore/Screens/ProfileScreen/profile.dart';
+import 'package:codestore/Screens/calender/calendarPage.dart';
 import 'package:codestore/Screens/login_screen/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -26,8 +27,8 @@ class _MyHomePageState extends State<MyHomePage>
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    const LikesScreen(),
-    EngineeringDashboardScreen(),
+    CalendarPage(),
+    const EngineeringDashboardScreen(),
     const ClassroomScreen(),
   ];
 
@@ -67,13 +68,10 @@ class _MyHomePageState extends State<MyHomePage>
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    final colorScheme = Theme.of(context).colorScheme;
     return AdvancedDrawer(
       backdrop: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: BoxDecoration(color: colorScheme.secondary),
       ),
       controller: _advancedDrawerController,
       animationCurve: Curves.easeInOut,
@@ -129,16 +127,13 @@ class _MyHomePageState extends State<MyHomePage>
                   FirebaseAuth.instance.signOut();
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
-                          builder: (context) => LoginSignupScreen()),
+                          builder: (context) => const LoginSignupScreen()),
                       (Route route) => false);
                 },
                 leading: const Icon(Icons.logout),
                 title: const Text('Log-Out'),
               ),
               const Spacer(),
-              ThemeToggleButton(
-                themeProvider: themeProvider,
-              ),
               DefaultTextStyle(
                 style: const TextStyle(
                   fontSize: 12,
@@ -164,7 +159,7 @@ class _MyHomePageState extends State<MyHomePage>
         floatingActionButton: CustomGNav(
           selectedIndex: _selectedIndex,
           onTabChange: _onTabChange,
-          colorScheme: colorScheme,
+          colorScheme: Theme.of(context).colorScheme,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),

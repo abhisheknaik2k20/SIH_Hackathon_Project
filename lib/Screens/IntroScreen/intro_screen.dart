@@ -1,7 +1,7 @@
 import 'package:codestore/Animations/fade_switch.dart';
 import 'package:codestore/Screens/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; // Import for rootBundle
+// Import for rootBundle
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:lottie/lottie.dart';
 

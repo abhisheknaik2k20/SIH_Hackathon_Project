@@ -50,7 +50,7 @@ Future<void> emailpassSignup(
     );
     Navigator.of(context).pop();
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (_) => MailVerificationScreen()),
+      MaterialPageRoute(builder: (_) => const MailVerificationScreen()),
     );
   } on FirebaseAuthException catch (e) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(

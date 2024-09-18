@@ -9,7 +9,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class OCRScreen extends StatefulWidget {
-  const OCRScreen({Key? key}) : super(key: key);
+  const OCRScreen({super.key});
 
   @override
   State<OCRScreen> createState() => _OCRScreenState();
@@ -74,7 +74,7 @@ class _OCRScreenState extends State<OCRScreen> {
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Storage permission denied')),
+        const SnackBar(content: Text('Storage permission denied')),
       );
     }
   }
@@ -88,28 +88,28 @@ class _OCRScreenState extends State<OCRScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('OCR to PDF')),
+      appBar: AppBar(title: const Text('OCR to PDF')),
       body: SingleChildScrollView(
         child: Column(
           children: [
             if (_image != null) Image.file(_image!),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
                   onPressed: () => _getImage(ImageSource.camera),
-                  child: Text('Camera'),
+                  child: const Text('Camera'),
                 ),
                 ElevatedButton(
                   onPressed: () => _getImage(ImageSource.gallery),
-                  child: Text('Gallery'),
+                  child: const Text('Gallery'),
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(_extractedText),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             if (_extractedText.isNotEmpty) ...[
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -122,7 +122,7 @@ class _OCRScreenState extends State<OCRScreen> {
               ),
               ElevatedButton(
                 onPressed: _savePdf,
-                child: Text('Save PDF'),
+                child: const Text('Save PDF'),
               ),
             ],
           ],

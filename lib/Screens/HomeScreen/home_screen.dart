@@ -66,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen>
                     color: Theme.of(context).colorScheme.primary),
                 const SizedBox(width: 8),
                 Text(
-                  "EduMate",
+                  "CodeStore",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
@@ -433,7 +433,7 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
                 Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 24,

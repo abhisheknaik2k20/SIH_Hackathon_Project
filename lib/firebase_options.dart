@@ -27,10 +27,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -54,30 +51,41 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAJs3Er6RC71YBU5v8s6U4uQh4Ka9CICjY',
-    appId: '1:461205043846:android:4e842add6e0a69e337af07',
+    apiKey: 'AIzaSyDwzflvbe2Kc7OvtQRxqHp0KdnD7ujvbN4',
+    appId: '1:461205043846:android:5a54ca14bef00ded37af07',
     messagingSenderId: '461205043846',
     projectId: 'codestore-38a40',
     storageBucket: 'codestore-38a40.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCIkXESrzLptq6xbkLoSCP9zOg8D9VOyTM',
+    apiKey: 'AIzaSyDH7OGtLtJDV2gqThvimLICv-zpg3epd34',
     appId: '1:461205043846:ios:3f27bca36d3d9cf837af07',
     messagingSenderId: '461205043846',
     projectId: 'codestore-38a40',
     storageBucket: 'codestore-38a40.appspot.com',
-    iosClientId: '461205043846-b2f6hm388g0q4cilsb0afr6hn2a6eh04.apps.googleusercontent.com',
+    androidClientId: '461205043846-ohruvh53jlmvin73lajuqbu1r8q50bje.apps.googleusercontent.com',
     iosBundleId: 'com.example.codestore',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCIkXESrzLptq6xbkLoSCP9zOg8D9VOyTM',
-    appId: '1:461205043846:ios:544b88a5dbf67c4737af07',
+    apiKey: 'AIzaSyDH7OGtLtJDV2gqThvimLICv-zpg3epd34',
+    appId: '1:461205043846:ios:3f27bca36d3d9cf837af07',
     messagingSenderId: '461205043846',
     projectId: 'codestore-38a40',
     storageBucket: 'codestore-38a40.appspot.com',
-    iosClientId: '461205043846-7n0up5ti6r014j8sjkkq600okn0qcs4b.apps.googleusercontent.com',
-    iosBundleId: 'com.example.codestore.RunnerTests',
+    androidClientId: '461205043846-ohruvh53jlmvin73lajuqbu1r8q50bje.apps.googleusercontent.com',
+    iosBundleId: 'com.example.codestore',
   );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyA9lFhGrPa_WgPFMFiMbnTfHwcL6ZLBvU4',
+    appId: '1:461205043846:web:c82063c6594af7d637af07',
+    messagingSenderId: '461205043846',
+    projectId: 'codestore-38a40',
+    authDomain: 'codestore-38a40.firebaseapp.com',
+    storageBucket: 'codestore-38a40.appspot.com',
+    measurementId: 'G-NKRTHLJ5WR',
+  );
+
 }

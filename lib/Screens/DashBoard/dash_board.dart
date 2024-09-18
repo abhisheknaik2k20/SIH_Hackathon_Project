@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class EngineeringDashboardScreen extends StatefulWidget {
-  const EngineeringDashboardScreen({Key? key}) : super(key: key);
+  const EngineeringDashboardScreen({super.key});
 
   @override
   _EngineeringDashboardScreenState createState() =>
@@ -38,7 +38,7 @@ class _EngineeringDashboardScreenState extends State<EngineeringDashboardScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       body: NestedScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[];
         },
@@ -46,8 +46,8 @@ class _EngineeringDashboardScreenState extends State<EngineeringDashboardScreen>
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        child: Icon(Icons.add),
         backgroundColor: Colors.indigo,
+        child: Icon(Icons.add),
       ),
     );
   }
@@ -75,27 +75,27 @@ class _EngineeringDashboardScreenState extends State<EngineeringDashboardScreen>
 
   Widget _buildGoodMorningCard() {
     return Card(
-      margin: EdgeInsets.all(16),
+      margin: const EdgeInsets.all(16),
       elevation: 4,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Good Morning, Engineer',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
-            Text('Here\'s what\'s happening in your engineering network'),
-            SizedBox(height: 16),
+            const SizedBox(height: 8),
+            const Text('Here\'s what\'s happening in your engineering network'),
+            const SizedBox(height: 16),
             LinearProgressIndicator(
               value: 0.7,
               backgroundColor: Colors.grey[200],
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.indigo),
+              valueColor: const AlwaysStoppedAnimation<Color>(Colors.indigo),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text('70% of your daily goals completed',
                 style: TextStyle(color: Colors.grey[600])),
           ],
@@ -105,7 +105,7 @@ class _EngineeringDashboardScreenState extends State<EngineeringDashboardScreen>
   }
 
   Widget _buildStorySection() {
-    return Container(
+    return SizedBox(
       height: 120,
       child: ListView(
         scrollDirection: Axis.horizontal,
@@ -152,13 +152,13 @@ class _EngineeringDashboardScreenState extends State<EngineeringDashboardScreen>
       },
       child: Container(
         width: 90,
-        margin: EdgeInsets.symmetric(horizontal: 8),
+        margin: const EdgeInsets.symmetric(horizontal: 8),
         child: Column(
           children: [
             Container(
               width: 70,
               height: 70,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
@@ -167,9 +167,9 @@ class _EngineeringDashboardScreenState extends State<EngineeringDashboardScreen>
                 ),
               ),
               child: Padding(
-                padding: EdgeInsets.all(2),
+                padding: const EdgeInsets.all(2),
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.white,
                   ),
@@ -181,7 +181,7 @@ class _EngineeringDashboardScreenState extends State<EngineeringDashboardScreen>
                 ),
               ),
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             Text(title,
                 textAlign: TextAlign.center,
                 maxLines: 2,
@@ -197,15 +197,16 @@ class _EngineeringDashboardScreenState extends State<EngineeringDashboardScreen>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Top Posts',
+              const Text('Top Posts',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               TextButton(
                 onPressed: () {},
-                child: Text('SEE ALL', style: TextStyle(color: Colors.indigo)),
+                child: const Text('SEE ALL',
+                    style: TextStyle(color: Colors.indigo)),
               ),
             ],
           ),
@@ -241,26 +242,27 @@ class _EngineeringDashboardScreenState extends State<EngineeringDashboardScreen>
   Widget _buildPostItem(String name, String title, String content, String time,
       List<String> hashtags, String? imageUrl) {
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(
-            leading: CircleAvatar(
+            leading: const CircleAvatar(
               backgroundImage: NetworkImage('https://placekitten.com/100/100'),
             ),
-            title: Text(name, style: TextStyle(fontWeight: FontWeight.bold)),
+            title:
+                Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
             subtitle: Text(title),
-            trailing: Text(time, style: TextStyle(color: Colors.grey)),
+            trailing: Text(time, style: const TextStyle(color: Colors.grey)),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Text(content),
           ),
           if (imageUrl != null)
-            Container(
+            SizedBox(
               height: 200,
               width: double.infinity,
               child: ClipRRect(
@@ -269,19 +271,19 @@ class _EngineeringDashboardScreenState extends State<EngineeringDashboardScreen>
               ),
             ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Wrap(
               spacing: 8.0,
               children: hashtags
                   .map((hashtag) => Chip(
                         label: Text(hashtag,
-                            style: TextStyle(color: Colors.indigo)),
+                            style: const TextStyle(color: Colors.indigo)),
                         backgroundColor: Colors.indigo.withOpacity(0.1),
                       ))
                   .toList(),
             ),
           ),
-          Divider(),
+          const Divider(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -300,7 +302,7 @@ class _EngineeringDashboardScreenState extends State<EngineeringDashboardScreen>
     return TextButton.icon(
       onPressed: () {},
       icon: Icon(icon, color: Colors.grey),
-      label: Text(label, style: TextStyle(color: Colors.grey)),
+      label: Text(label, style: const TextStyle(color: Colors.grey)),
     );
   }
 }
@@ -338,13 +340,13 @@ class StoryViewerScreen extends StatefulWidget {
   final int durationInSeconds;
 
   const StoryViewerScreen({
-    Key? key,
+    super.key,
     required this.title,
     this.imageUrl,
     required this.username,
     required this.description,
     this.durationInSeconds = 5,
-  }) : super(key: key);
+  });
 
   @override
   _StoryViewerScreenState createState() => _StoryViewerScreenState();
@@ -361,7 +363,7 @@ class _StoryViewerScreenState extends State<StoryViewerScreen> {
   }
 
   void _startProgress() {
-    _timer = Timer.periodic(Duration(milliseconds: 50), (timer) {
+    _timer = Timer.periodic(const Duration(milliseconds: 50), (timer) {
       setState(() {
         progress += 0.01;
         if (progress >= 1.0) {
@@ -392,10 +394,10 @@ class _StoryViewerScreenState extends State<StoryViewerScreen> {
                 child: widget.imageUrl != null
                     ? Image.network(widget.imageUrl!, fit: BoxFit.contain)
                     : Container(
-                        padding: EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(16.0),
                         child: Text(
                           widget.title,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
@@ -415,7 +417,7 @@ class _StoryViewerScreenState extends State<StoryViewerScreen> {
                 child: LinearProgressIndicator(
                   value: progress,
                   backgroundColor: Colors.grey[700],
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                  valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
                 ),
               ),
             ),
@@ -424,8 +426,8 @@ class _StoryViewerScreenState extends State<StoryViewerScreen> {
               left: 0,
               right: 0,
               child: Container(
-                padding: EdgeInsets.all(16.0),
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.all(16.0),
+                decoration: const BoxDecoration(
                   color: Colors.black54,
                   borderRadius:
                       BorderRadius.vertical(top: Radius.circular(16.0)),
@@ -436,22 +438,22 @@ class _StoryViewerScreenState extends State<StoryViewerScreen> {
                   children: [
                     Text(
                       widget.username,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 8.0),
+                    const SizedBox(height: 8.0),
                     Text(
                       widget.description,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white70,
                         fontSize: 14,
                       ),
                     ),
-                    SizedBox(height: 8.0),
-                    Row(
+                    const SizedBox(height: 8.0),
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Icon(Icons.favorite_border, color: Colors.white),

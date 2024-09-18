@@ -1,7 +1,6 @@
 import 'package:codestore/Animations/light_to_dark.dart';
 import 'package:codestore/Screens/BootScreen/my_home_page.dart';
 import 'package:codestore/Screens/IntroScreen/intro_screen.dart';
-import 'package:codestore/Screens/pptx/pptfetcher.dart';
 import 'package:codestore/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -15,35 +14,20 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.android,
   );
   _preloadLottieAnimations();
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
-      child: const MyApp(),
-    ),
-  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeProvider>(
-      builder: (context, themeProvider, child) {
-        return AnimatedTheme(
-          data: themeProvider.currentTheme,
-          duration: const Duration(milliseconds: 500),
-          child: MaterialApp(
-            title: 'App Demo',
-            theme: themeProvider.currentTheme,
-            home: PowerPointList(),
-
-            ///FirebaseAuth.instance.currentUser == null
-            ///? CodeStoreIntroScreen(onDone: () {})
-            ///: const MyHomePage(),
-            debugShowCheckedModeBanner: false,
-          ),
-        );
-      },
+    return MaterialApp(
+      title: 'App Demo',
+      theme: Theme.of(context),
+      home: FirebaseAuth.instance.currentUser == null
+          ? CodeStoreIntroScreen(onDone: () {})
+          : const MyHomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

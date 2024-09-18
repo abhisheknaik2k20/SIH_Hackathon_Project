@@ -3,7 +3,7 @@ import 'package:codestore/Screens/Community/chat_screen.dart';
 import 'package:flutter/material.dart';
 
 class ClassroomScreen extends StatefulWidget {
-  const ClassroomScreen({Key? key}) : super(key: key);
+  const ClassroomScreen({super.key});
 
   @override
   _ClassroomScreenState createState() => _ClassroomScreenState();

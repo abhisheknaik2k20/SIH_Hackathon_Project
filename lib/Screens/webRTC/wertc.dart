@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key}) : super(key: key);
+  const MyHomePage({super.key});
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -13,8 +13,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Signaling signaling = Signaling();
-  RTCVideoRenderer _localRenderer = RTCVideoRenderer();
-  RTCVideoRenderer _remoteRenderer = RTCVideoRenderer();
+  final RTCVideoRenderer _localRenderer = RTCVideoRenderer();
+  final RTCVideoRenderer _remoteRenderer = RTCVideoRenderer();
   String? roomId;
   TextEditingController textEditingController = TextEditingController(text: '');
 
@@ -42,11 +42,11 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Welcome to Flutter Explained - WebRTC"),
+        title: const Text("Welcome to Flutter Explained - WebRTC"),
       ),
       body: Column(
         children: [
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -54,9 +54,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () {
                   signaling.openUserMedia(_localRenderer, _remoteRenderer);
                 },
-                child: Text("Open camera & microphone"),
+                child: const Text("Open camera & microphone"),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 8,
               ),
               ElevatedButton(
@@ -65,9 +65,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   textEditingController.text = roomId!;
                   setState(() {});
                 },
-                child: Text("Create room"),
+                child: const Text("Create room"),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 8,
               ),
               ElevatedButton(
@@ -78,20 +78,20 @@ class _MyHomePageState extends State<MyHomePage> {
                     _remoteRenderer,
                   );
                 },
-                child: Text("Join room"),
+                child: const Text("Join room"),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 8,
               ),
               ElevatedButton(
                 onPressed: () {
                   signaling.hangUp(_localRenderer);
                 },
-                child: Text("Hangup"),
+                child: const Text("Hangup"),
               )
             ],
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -109,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Join the following Room: "),
+                const Text("Join the following Room: "),
                 Flexible(
                   child: TextFormField(
                     controller: textEditingController,
@@ -118,14 +118,14 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ),
-          SizedBox(height: 8)
+          const SizedBox(height: 8)
         ],
       ),
     );
   }
 }
 
-typedef void StreamStateCallback(MediaStream stream);
+typedef StreamStateCallback = void Function(MediaStream stream);
 
 class Signaling {
   Map<String, dynamic> configuration = {
@@ -211,7 +211,7 @@ class Signaling {
 
     // Listen for remote Ice candidates below
     roomRef.collection('calleeCandidates').snapshots().listen((snapshot) {
-      snapshot.docChanges.forEach((change) {
+      for (var change in snapshot.docChanges) {
         if (change.type == DocumentChangeType.added) {
           Map<String, dynamic> data = change.doc.data() as Map<String, dynamic>;
           print('Got new remote ICE candidate: ${jsonEncode(data)}');
@@ -223,7 +223,7 @@ class Signaling {
             ),
           );
         }
-      });
+      }
     });
     // Listen for remote ICE candidates above
 
@@ -233,7 +233,7 @@ class Signaling {
   Future<void> joinRoom(String roomId, RTCVideoRenderer remoteVideo) async {
     FirebaseFirestore db = FirebaseFirestore.instance;
     print(roomId);
-    DocumentReference roomRef = db.collection('rooms').doc('$roomId');
+    DocumentReference roomRef = db.collection('rooms').doc(roomId);
     var roomSnapshot = await roomRef.get();
     print('Got room ${roomSnapshot.exists}');
 
@@ -288,7 +288,7 @@ class Signaling {
 
       // Listening for remote ICE candidates below
       roomRef.collection('callerCandidates').snapshots().listen((snapshot) {
-        snapshot.docChanges.forEach((document) {
+        for (var document in snapshot.docChanges) {
           var data = document.doc.data() as Map<String, dynamic>;
           print(data);
           print('Got new remote ICE candidate: $data');
@@ -299,7 +299,7 @@ class Signaling {
               data['sdpMLineIndex'],
             ),
           );
-        });
+        }
       });
     }
   }
@@ -319,9 +319,9 @@ class Signaling {
 
   Future<void> hangUp(RTCVideoRenderer localVideo) async {
     List<MediaStreamTrack> tracks = localVideo.srcObject!.getTracks();
-    tracks.forEach((track) {
+    for (var track in tracks) {
       track.stop();
-    });
+    }
 
     if (remoteStream != null) {
       remoteStream!.getTracks().forEach((track) => track.stop());
@@ -332,10 +332,14 @@ class Signaling {
       var db = FirebaseFirestore.instance;
       var roomRef = db.collection('rooms').doc(roomId);
       var calleeCandidates = await roomRef.collection('calleeCandidates').get();
-      calleeCandidates.docs.forEach((document) => document.reference.delete());
+      for (var document in calleeCandidates.docs) {
+        document.reference.delete();
+      }
 
       var callerCandidates = await roomRef.collection('callerCandidates').get();
-      callerCandidates.docs.forEach((document) => document.reference.delete());
+      for (var document in callerCandidates.docs) {
+        document.reference.delete();
+      }
 
       await roomRef.delete();
     }

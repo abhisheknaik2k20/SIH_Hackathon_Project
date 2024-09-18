@@ -20,10 +20,10 @@ class ChatRoomScreen extends StatefulWidget {
   final String chatPartnerId;
 
   const ChatRoomScreen({
-    Key? key,
+    super.key,
     required this.chatPartner,
     required this.chatPartnerId,
-  }) : super(key: key);
+  });
 
   @override
   _ChatRoomScreenState createState() => _ChatRoomScreenState();
@@ -48,8 +48,8 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
 
   String _getChatRoomId(String userId1, String userId2) {
     return userId1.compareTo(userId2) < 0
-        ? '${userId1}_${userId2}'
-        : '${userId2}_${userId1}';
+        ? '${userId1}_$userId2'
+        : '${userId2}_$userId1';
   }
 
   void _setupFCM() async {
@@ -188,11 +188,11 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
         title: Text(widget.chatPartner),
         actions: [
           IconButton(
-            icon: Icon(Icons.document_scanner),
+            icon: const Icon(Icons.document_scanner),
             onPressed: () async {
               final result = await Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => OCRScreen()),
+                MaterialPageRoute(builder: (context) => const OCRScreen()),
               );
               if (result != null && result is File) {
                 await _sendPdfFile(result);
@@ -200,7 +200,7 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
             },
           ),
           IconButton(
-            icon: Icon(Icons.video_call),
+            icon: const Icon(Icons.video_call),
             onPressed: () {},
           )
         ],
@@ -247,7 +247,7 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
       child: Row(
         children: <Widget>[
           IconButton(
-            icon: Icon(Icons.attach_file),
+            icon: const Icon(Icons.attach_file),
             onPressed: _pickAndSendFile,
           ),
           Expanded(
@@ -311,11 +311,11 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
                   fontWeight: FontWeight.bold,
                   color: isMe ? Colors.white : Colors.black),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             GestureDetector(
               onTap: () => _openMediaViewer(message),
               child: Container(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
@@ -324,7 +324,7 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(_getFileIcon(fileType)),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Text('View $fileType'),
                   ],
                 ),
@@ -375,7 +375,7 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
         viewer = _AudioPlayer(audioUrl: fileUrl);
         break;
       default:
-        viewer = Center(child: Text('Unsupported file type'));
+        viewer = const Center(child: Text('Unsupported file type'));
     }
 
     Navigator.of(context).push(MaterialPageRoute(
@@ -390,15 +390,15 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
 class _ImageViewer extends StatelessWidget {
   final String imageUrl;
 
-  const _ImageViewer({Key? key, required this.imageUrl}) : super(key: key);
+  const _ImageViewer({super.key, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: CachedNetworkImage(
         imageUrl: imageUrl,
-        placeholder: (context, url) => CircularProgressIndicator(),
-        errorWidget: (context, url, error) => Icon(Icons.error),
+        placeholder: (context, url) => const CircularProgressIndicator(),
+        errorWidget: (context, url, error) => const Icon(Icons.error),
       ),
     );
   }
@@ -407,7 +407,7 @@ class _ImageViewer extends StatelessWidget {
 class _VideoViewer extends StatefulWidget {
   final String videoUrl;
 
-  const _VideoViewer({Key? key, required this.videoUrl}) : super(key: key);
+  const _VideoViewer({super.key, required this.videoUrl});
 
   @override
   _VideoViewerState createState() => _VideoViewerState();
@@ -444,7 +444,7 @@ class _VideoViewerState extends State<_VideoViewer> {
 class _PdfViewer extends StatelessWidget {
   final String pdfUrl;
 
-  const _PdfViewer({Key? key, required this.pdfUrl}) : super(key: key);
+  const _PdfViewer({super.key, required this.pdfUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -464,7 +464,7 @@ class _PdfViewer extends StatelessWidget {
             return Text('Error loading PDF: ${snapshot.error}');
           }
         }
-        return CircularProgressIndicator();
+        return const CircularProgressIndicator();
       },
     );
   }
@@ -473,7 +473,7 @@ class _PdfViewer extends StatelessWidget {
 class _AudioPlayer extends StatefulWidget {
   final String audioUrl;
 
-  const _AudioPlayer({Key? key, required this.audioUrl}) : super(key: key);
+  const _AudioPlayer({super.key, required this.audioUrl});
 
   @override
   _AudioPlayerState createState() => _AudioPlayerState();
@@ -502,15 +502,15 @@ class _AudioPlayerState extends State<_AudioPlayer> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           IconButton(
-            icon: Icon(Icons.play_arrow),
+            icon: const Icon(Icons.play_arrow),
             onPressed: () => _audioPlayer.play(),
           ),
           IconButton(
-            icon: Icon(Icons.pause),
+            icon: const Icon(Icons.pause),
             onPressed: () => _audioPlayer.pause(),
           ),
           IconButton(
-            icon: Icon(Icons.stop),
+            icon: const Icon(Icons.stop),
             onPressed: () => _audioPlayer.stop(),
           ),
         ],

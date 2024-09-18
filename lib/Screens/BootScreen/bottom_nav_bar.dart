@@ -40,8 +40,8 @@ class CustomGNav extends StatelessWidget {
             text: 'Home',
           ),
           GButton(
-            icon: LineIcons.heart,
-            text: 'Likes',
+            icon: LineIcons.calendar,
+            text: 'Calendar',
           ),
           GButton(
             icon: LineIcons.wiredNetwork,

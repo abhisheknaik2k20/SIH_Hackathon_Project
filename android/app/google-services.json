@@ -7,20 +7,28 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:461205043846:android:4e842add6e0a69e337af07",
+        "mobilesdk_app_id": "1:461205043846:android:5a54ca14bef00ded37af07",
         "android_client_info": {
-          "package_name": "com.example.codestore"
+          "package_name": "com.codestore.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "461205043846-3b6csn6btbvanf9uf23gqi82rlpcnbgu.apps.googleusercontent.com",
+          "client_id": "461205043846-ohruvh53jlmvin73lajuqbu1r8q50bje.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codestore.app",
+            "certificate_hash": "707c9217f7b000bbc3583f57f923c6d0d3a8106d"
+          }
+        },
+        {
+          "client_id": "461205043846-b46jh43t77e19avaplukaclmej8nlucp.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAJs3Er6RC71YBU5v8s6U4uQh4Ka9CICjY"
+          "current_key": "AIzaSyDwzflvbe2Kc7OvtQRxqHp0KdnD7ujvbN4"
         }
       ],
       "services": {
@@ -29,6 +37,13 @@
             {
               "client_id": "461205043846-3b6csn6btbvanf9uf23gqi82rlpcnbgu.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "461205043846-k779i3qjnt44blu9ssjct60uekaofmvq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.codestoreapp.RunnerTests"
+              }
             }
           ]
         }

@@ -2,9 +2,8 @@ import 'package:codestore/Animations/light_to_dark.dart';
 import 'package:flutter/material.dart';
 
 class ThemeToggleButton extends StatefulWidget {
-  final ThemeProvider themeProvider;
 
-  const ThemeToggleButton({required this.themeProvider, super.key});
+  const ThemeToggleButton({ super.key});
 
   @override
   _ThemeToggleButtonState createState() => _ThemeToggleButtonState();
@@ -28,10 +27,7 @@ class _ThemeToggleButtonState extends State<ThemeToggleButton>
       curve: Curves.easeInOut,
     );
 
-    // Sync animation with the initial theme
-    if (widget.themeProvider.isDarkMode) {
-      _controller.value = 1.0;
-    }
+  
   }
 
   @override
@@ -48,14 +44,7 @@ class _ThemeToggleButtonState extends State<ThemeToggleButton>
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: InkWell(
-            onTap: () {
-              if (widget.themeProvider.isDarkMode) {
-                _controller.reverse();
-              } else {
-                _controller.forward();
-              }
-              widget.themeProvider.toggleTheme(context);
-            },
+          
             borderRadius: BorderRadius.circular(30),
             child: Container(
               width: 80,

@@ -87,7 +87,7 @@ class _MailVerificationScreenState extends State<MailVerificationScreen>
       );
       await Future.delayed(const Duration(seconds: 2));
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => MyHomePage()),
+        MaterialPageRoute(builder: (_) => const MyHomePage()),
       );
     }
   }
@@ -258,7 +258,7 @@ class _MailVerificationScreenState extends State<MailVerificationScreen>
           ),
           child: Text(
             canResendEmail ? 'Resend Email' : 'Wait before resending',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
         ),
       ],
