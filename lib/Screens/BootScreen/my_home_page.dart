@@ -1,5 +1,13 @@
 import 'package:codestore/Animations/light_to_dark.dart';
-import 'package:codestore/HomeScreen/bottom_nav_bar.dart';
+import 'package:codestore/Screens/Community/community.dart';
+import 'package:codestore/CustomWidgets/togglebutton.dart';
+import 'package:codestore/Screens/BootScreen/bottom_nav_bar.dart';
+import 'package:codestore/Screens/DashBoard/dash_board.dart';
+import 'package:codestore/Screens/HomeScreen/home_screen.dart';
+import 'package:codestore/Screens/ProfileScreen/profile.dart';
+import 'package:codestore/Screens/calender/calendarPage.dart';
+import 'package:codestore/Screens/login_screen/login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:provider/provider.dart';
@@ -10,18 +18,60 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
   int _selectedIndex = 0;
   final _advancedDrawerController = AdvancedDrawerController();
+  late AnimationController _animationController;
+  late PageController _pageController;
+
+  final List<Widget> _screens = [
+    const HomeScreen(),
+    CalendarPage(),
+    const EngineeringDashboardScreen(),
+    const ClassroomScreen(),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      duration: const Duration(seconds: 10),
+      vsync: this,
+    )..repeat();
+    _pageController = PageController(initialPage: _selectedIndex);
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _onPageChanged(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  void _onTabChange(int index) {
+    setState(() {
+      _selectedIndex = index;
+      _pageController.animateToPage(
+        index,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    final colorScheme = Theme.of(context).colorScheme;
     return AdvancedDrawer(
       backdrop: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: BoxDecoration(color: colorScheme.secondary),
       ),
       controller: _advancedDrawerController,
       animationCurve: Curves.easeInOut,
@@ -72,6 +122,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 leading: const Icon(Icons.settings),
                 title: const Text('Settings'),
               ),
+              ListTile(
+                onTap: () {
+                  FirebaseAuth.instance.signOut();
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (context) => const LoginSignupScreen()),
+                      (Route route) => false);
+                },
+                leading: const Icon(Icons.logout),
+                title: const Text('Log-Out'),
+              ),
               const Spacer(),
               DefaultTextStyle(
                 style: const TextStyle(
@@ -90,55 +151,45 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('My App'),
-          leading: IconButton(
-            onPressed: _handleMenuButtonPressed,
-            icon: ValueListenableBuilder<AdvancedDrawerValue>(
-              valueListenable: _advancedDrawerController,
-              builder: (_, value, __) {
-                return AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 250),
-                  child: Icon(
-                    value.visible ? Icons.clear : Icons.menu,
-                    key: ValueKey<bool>(value.visible),
-                  ),
-                );
-              },
-            ),
-          ),
-          actions: [
-            IconButton(
-              icon: Icon(themeProvider.isDarkMode
-                  ? Icons.light_mode
-                  : Icons.dark_mode),
-              onPressed: () {
-                themeProvider.toggleTheme(context);
-              },
-            ),
-          ],
-        ),
-        body: Center(
-          child: Text(
-            'Page ${_selectedIndex + 1}',
-            style: TextStyle(color: colorScheme.onSurface),
-          ),
+        body: PageView(
+          controller: _pageController,
+          onPageChanged: _onPageChanged,
+          children: _screens,
         ),
         floatingActionButton: CustomGNav(
           selectedIndex: _selectedIndex,
-          onTabChange: (index) {
-            setState(() {
-              _selectedIndex = index;
-            });
-          },
-          colorScheme: colorScheme,
+          onTabChange: _onTabChange,
+          colorScheme: Theme.of(context).colorScheme,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
     );
   }
+}
 
-  void _handleMenuButtonPressed() {
-    _advancedDrawerController.showDrawer();
+class LikesScreen extends StatelessWidget {
+  const LikesScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(child: Text('Likes Screen'));
+  }
+}
+
+class SearchScreen extends StatelessWidget {
+  const SearchScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(child: Text('Search Screen'));
+  }
+}
+
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(child: Text('Profile Screen'));
   }
 }

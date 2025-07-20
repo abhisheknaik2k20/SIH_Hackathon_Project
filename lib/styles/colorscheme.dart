@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color primaryLight = Colors.teal;
-  static const Color secondaryLight = Colors.teal;
+  static const Color primaryLight = Color(0xFF1A73E8);
+  static const Color secondaryLight = Color.fromARGB(255, 215, 107, 0);
   static const Color backgroundLight = Colors.white;
   static const Color surfaceLight = Colors.white;
   static const Color errorLight = Color(0xFFB00020);
@@ -12,16 +12,20 @@ class AppColors {
   static const Color onSurfaceLight = Colors.black;
   static const Color onErrorLight = Colors.white;
 
-  static const Color primaryDark = Colors.teal;
-  static const Color secondaryDark = Colors.teal;
-  static const Color backgroundDark = Color(0xFF121212);
-  static const Color surfaceDark = Color(0xFF121212);
-  static const Color errorDark = Color(0xFFCF6679);
-  static const Color onPrimaryDark = Colors.black;
+  static const Color primaryDark = Color(0xFF1A73E8);
+  static const Color secondaryDark = Color.fromARGB(255, 215, 107, 0);
+  static const Color surfaceDark = Color.fromARGB(255, 4, 18, 53);
+  static const Color errorDark = Color(0xFFEF4444);
+  static const Color onPrimaryDark = Colors.white;
   static const Color onSecondaryDark = Colors.black;
   static const Color onBackgroundDark = Colors.white;
   static const Color onSurfaceDark = Colors.white;
-  static const Color onErrorDark = Colors.black;
+  static const Color onErrorDark = Colors.white;
+
+  // Additional colors for dark theme
+  static const Color cardDark = Color(0xFF334155); // For elevated surfaces
+  static const Color dividerDark =
+      Color(0xFF475569); // For dividers and borders
 }
 
 final lightTheme = ThemeData(
@@ -51,5 +55,8 @@ final darkTheme = ThemeData(
     onError: AppColors.onErrorDark,
     brightness: Brightness.dark,
   ),
+  scaffoldBackgroundColor: AppColors.surfaceDark,
+  cardColor: AppColors.cardDark,
+  dividerColor: AppColors.dividerDark,
   useMaterial3: true,
 );

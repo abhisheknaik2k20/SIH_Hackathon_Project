@@ -40,12 +40,12 @@ class CustomGNav extends StatelessWidget {
             text: 'Home',
           ),
           GButton(
-            icon: LineIcons.heart,
-            text: 'Likes',
+            icon: LineIcons.calendar,
+            text: 'Calendar',
           ),
           GButton(
-            icon: LineIcons.search,
-            text: 'Search',
+            icon: LineIcons.wiredNetwork,
+            text: 'Forum',
           ),
           GButton(
             icon: LineIcons.user,
